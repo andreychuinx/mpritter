@@ -21,6 +21,12 @@
     <el-menu-item index="4" v-if="isLoggedIn" @click="logout">
       Logout
     </el-menu-item>
+    <router-link :to="{name: 'accountPage'}" v-if="isLoggedIn">
+      <el-menu-item index="5">
+        Account
+      </el-menu-item>
+    </router-link>
+    
     
   </el-menu>
 </div>

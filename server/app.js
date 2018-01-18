@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const HttpStatus = require('http-status-codes')
 const cors = require('cors')
 const mongoose = require('mongoose')
-// const user = require('./routes/user')
+const user = require('./routes/user')
 const post = require('./routes/post')
 const signin = require('./routes/signin')
 const signup = require('./routes/signup')
@@ -26,7 +26,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/api/users', user)
+app.use('/api/users', user)
 app.use('/api/posts', post)
 app.use('/api/signin', signin)
 app.use('/api/signup', signup)

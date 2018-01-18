@@ -24,6 +24,47 @@ class PostController {
       })
   }
 
+  static userPosts(req, res){
+    PostModel.find({userId : req.decoded.userId})
+      .populate('userId')
+      .exec()
+      .then(result => {
+        res.status(HttpStatus.OK).json({
+          messages: 'Data Post',
+          data: result
+        })
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          messages: 'Data Post Error Server',
+          data: err,
+          error: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+        })
+      })
+  }
+
+  static tags(req, res) {
+    // console.log(req.params.tag)
+    let tag = `#${req.params.tag}`
+    PostModel.find({tags: tag})
+      .populate('userId')
+      .exec()
+      .then(result => {
+        console.log(result)
+        res.status(HttpStatus.OK).json({
+          messages: 'Data Tags',
+          data: result
+        })
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          messages: 'Data Tags Error Server',
+          data: err,
+          error: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+        })
+      })
+  }
+
   static getSingle(req, res) {
     PostModel.findById(req.params.id)
       .populate('userId')

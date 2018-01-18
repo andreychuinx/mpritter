@@ -5,6 +5,9 @@ import HelloWorld from '@/components/HelloWorld'
 import home from '@/components/Home'
 import login from '@/components/Login'
 import signup from '@/components/Register'
+import tagPage from '@/components/Tags'
+import account from '@/components/Account'
+
 Vue.use(Router)
 Vue.use(Vuex)
 export default new Router({
@@ -13,7 +16,7 @@ export default new Router({
     {
       path: '/',
       name: 'homePage',
-      component: home
+      component: home,
     },
     {
       path: '/login',
@@ -24,6 +27,17 @@ export default new Router({
       path: '/signup',
       name: 'signupPage',
       component: signup
+    },
+    {
+      path: '/tags',
+      name: 'tagsPage',
+      props: true,
+      component: tagPage
+    },
+    {
+      path: '/account',
+      name: 'accountPage',
+      component: account
     }
   ]
 })

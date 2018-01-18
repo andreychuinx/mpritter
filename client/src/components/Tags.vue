@@ -1,27 +1,6 @@
 <template>
 <div>
-  <el-row style="padding: 10px;">
-    <el-col>
-      <el-card :body-style="{ padding: '0px' }">
-        <el-row>
-          <div style="padding: 14px; text-align: left;">
-             <el-form ref="form" >
-               <el-form-item>
-                <el-input type="textarea" v-model="post" :autosize="{ minRows: 4}"></el-input>
-                <el-button type="primary" @click="addPost">Post</el-button>
-                <el-button>Cancel</el-button>
-                <span style="color: red;">{{alertPost}}</span>
-              </el-form-item>
-              
-                
-             </el-form>
-          </div>
-        </el-row>
-      
-    </el-card>
-    </el-col>
-  </el-row>
-  <el-row style="padding: 10px;" v-for="post in posts" :key="post._id">
+  <el-row style="padding: 10px;" v-for="post in tags" :key="post._id">
     <el-col>
       <el-card :body-style="{ padding: '0px' }">
         <el-row>
@@ -32,7 +11,7 @@
             </div><br />
             <div >
               <p style="margin-bottom: 0px;">Tags :</p>
-              <span v-for="(tag, idx) in tags(post.post)" :key="idx" style="padding-top: 0px;">
+              <span v-for="(tag, idx) in tagsGrouping(post.post)" :key="idx" style="padding-top: 0px;">
                 <router-link :to="`/tags/?tag=${tag}`">
                   <el-button type="text">#{{tag}}</el-button>
                 
@@ -68,13 +47,15 @@ export default {
       };
     },
     computed: {
-      ...mapState(['isLoggedIn', 'posts'])
+      ...mapState(['isLoggedIn', 'tags'])
     },
     mounted() {
-      this.$store.dispatch('getPosts')
+      this.$store.dispatch('getTags', {
+        tag : this.$route.query.tag
+      })
     },
     methods: {
-      tags(post){
+      tagsGrouping(post){
         let arrTag = []
         // let manipulationTag = post.split(' ').filter(tag => {
         //   if(tag[0] == '#'){

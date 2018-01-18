@@ -19,5 +19,26 @@ export default {
   },
   [types.ADD_POST](state, { data }){
     state.posts = [data, ...state.posts]
+  },
+  [types.GET_TAGS](state, { data }){
+    state.tags = data
+  },
+  [types.GET_USERPOSTS](state, { data }){
+    state.userPosts = data
+  },
+  [types.DELETE_POST](state, { data }){
+    state.userPosts = state.userPosts.filter(post => {
+      return post._id !== data._id
+    })
+  },
+  [types.EDIT_USER](state, { data }){
+    localStorage.removeItem('user')
+    let newUser = {
+      userId : data._id,
+      name: data.name,
+      email: data.email
+    }
+    let dataUser = JSON.stringify(newUser)
+    localStorage.setItem('user', dataUser)
   }
 }
