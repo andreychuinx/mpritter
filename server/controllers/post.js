@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const PostModel = require('../models/post')
+const HttpStatus = require('http-status-codes')
+const jwt = require('jsonwebtoken')
 
 class PostController {
   static get(req, res){
@@ -42,9 +44,15 @@ class PostController {
   }
 
   static create(req, res) {
+    let tags = req.body.post.split(' ').filter(tag => {
+      if(tag[0] == '#'){
+        return tag
+      }
+    })
     let objPost = {
       post: req.body.post,
-      userId: req.decoded.userId
+      userId: req.decoded.userId,
+      tags: tags
     }
     let dataPost = new PostModel(objPost)
     dataPost.save()

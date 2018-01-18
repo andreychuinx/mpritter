@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use('/api/users', user)
-app.use('/api/post', post)
+app.use('/api/posts', post)
 app.use('/api/signin', signin)
 app.use('/api/signup', signup)
 

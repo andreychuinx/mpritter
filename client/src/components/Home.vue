@@ -1,39 +1,27 @@
 <template>
 <div>
-  <el-menu
-  :default-active="activeIndex2"
-  class="el-menu-demo"
-  mode="horizontal"
-  @select="handleSelect"
-  background-color="#545c64"
-  text-color="#fff"
-  active-text-color="#ffd04b">
-    <el-menu-item index="1">Home</el-menu-item>
-    
-  </el-menu>
-  <el-row style="padding-top: 10px;">
+  <el-row style="padding: 10px;">
     <el-col>
       <el-card :body-style="{ padding: '0px' }">
         <el-row>
           <div style="padding: 14px; text-align: left;">
-            <el-form-item label="Description">
-              <el-input type="textarea" :autosize="{ minRows: 10}"></el-input>
-            </el-form-item>
-            <div class="bottom clearfix">
-              <el-button type="text" class="button">Operating button</el-button>
-            </div>
-          </div>
-        </el-row>
-        <el-row>
-          <div style=" padding-bottom: 10px; padding-right:10px; text-align: right;">
-            TEST
+             <el-form ref="form" >
+               <el-form-item>
+                <el-input type="textarea" v-model="post" :autosize="{ minRows: 4}"></el-input>
+                <el-button type="primary" @click="addPost">Post</el-button>
+                <el-button>Cancel</el-button>
+                <span style="color: red;">{{alertPost}}</span>
+              </el-form-item>
+              
+                
+             </el-form>
           </div>
         </el-row>
       
     </el-card>
     </el-col>
   </el-row>
-  <el-row style="padding-top: 10px;">
+  <el-row style="padding: 10px;">
     <el-col>
       <el-card :body-style="{ padding: '0px' }">
         <el-row>
@@ -63,12 +51,32 @@ export default {
   data() {
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        post: '',
+        alertPost: ''
       };
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      addPost(){
+        if(this.post.length == 140){
+          this.$message({
+            message: 'Post Character gk boleh dari 140',
+            type: 'error',
+          })
+        }else{
+          // this.$store.dispatch('addPost', {
+
+          // })
+        }
+      }
+    },
+    watch: {
+      post(){
+        if(this.post.length > 140){
+          this.alertPost = 'Tulisan Lebih dari 140'
+        }else{
+          this.alertPost = ''
+        }
       }
     }
 }
