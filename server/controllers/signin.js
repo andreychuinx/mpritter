@@ -44,7 +44,10 @@ class SignInController {
               }
             })
             .catch(err => {
-              console.log(err)
+              (HttpStatus.INTERNAL_SERVER_ERROR).json({
+                messages: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR),
+                data: err
+              })
             })
         }
       })
