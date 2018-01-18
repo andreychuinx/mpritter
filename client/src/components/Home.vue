@@ -21,20 +21,20 @@
     </el-card>
     </el-col>
   </el-row>
-  <el-row style="padding: 10px;">
+  <el-row style="padding: 10px;" v-for="post in posts" :key="post._id">
     <el-col>
       <el-card :body-style="{ padding: '0px' }">
         <el-row>
           <div style="padding: 14px; text-align: left;">
-            <span>Nama User</span>
+            <h3>{{post.userId.name}}</h3>
             <div class="bottom clearfix">
-              <el-button type="text" class="button">Operating button</el-button>
+              {{post.post}}
             </div>
           </div>
         </el-row>
         <el-row>
           <div style=" padding-bottom: 10px; padding-right:10px; text-align: right;">
-            TEST
+            {{post.createdAt}}
           </div>
         </el-row>
       
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
       return {
@@ -56,17 +57,30 @@ export default {
         alertPost: ''
       };
     },
+    computed: {
+      ...mapState(['isLoggedIn', 'posts'])
+    },
+    mounted() {
+      this.$store.dispatch('getPosts')
+    },
     methods: {
       addPost(){
-        if(this.post.length == 140){
+        if(this.post.length > 140){
           this.$message({
             message: 'Post Character gk boleh dari 140',
             type: 'error',
           })
         }else{
-          // this.$store.dispatch('addPost', {
-
-          // })
+          this.$store.dispatch('addPost', {
+            post: this.post
+          })
+          .then(()=>{
+            this.post = ''
+            this.$message({
+              message: 'Post Berhasil',
+              type: 'success'
+            })
+          })
         }
       }
     },

@@ -18,7 +18,7 @@
     <router-link :to="{name: 'signupPage'}" v-if="!isLoggedIn">
       <el-menu-item index="3">Signup</el-menu-item>
     </router-link>
-    <el-menu-item index="4">
+    <el-menu-item index="4" v-if="isLoggedIn" @click="logout">
       Logout
     </el-menu-item>
     
@@ -43,6 +43,34 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
     },
+    logout(){
+      this.$confirm('Are you sure wanna Logout?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      })
+        .then(() => {
+          this.$store
+            .dispatch('logout')
+            .then(() => {
+              this.$message({
+                type: 'success',
+                message: 'Logout Berhasil',
+              })
+              this.$router.push({name: 'homePage'})
+            })
+            .catch(err=> {
+              console.log(err)
+            })
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'info',
+            message: 'Logout canceled',
+          })
+        })
+    }
   }
 }
 </script>

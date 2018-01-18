@@ -37,4 +37,28 @@ export default {
     })
     
   },
+  logout(context){
+    context.commit(types.SIGNOUT)
+  },
+  getPosts(context){
+    axios.get('/posts')
+    .then(result => {
+      context.commit(types.GET_POSTS, {
+        data: result.data.data
+      })
+    })
+  },
+  addPost(context, { post }){
+    axios.post('/posts', {
+      post
+    })
+    .then(result => {
+      context.commit(types.ADD_POST, {
+        data: result.data.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 }
