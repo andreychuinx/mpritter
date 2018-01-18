@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-row style="padding: 10px;">
+  <el-row style="padding: 10px;" v-if="isLoggedIn">
     <el-col>
       <el-card :body-style="{ padding: '0px' }">
         <el-row>
@@ -76,11 +76,6 @@ export default {
     methods: {
       tags(post){
         let arrTag = []
-        // let manipulationTag = post.split(' ').filter(tag => {
-        //   if(tag[0] == '#'){
-        //     return tag
-        //   }
-        // })
         post.split(' ').forEach(tag =>{
           if(tag[0]=='#'){
             let string = tag.split('')
@@ -90,7 +85,7 @@ export default {
             arrTag.push(string.join(''))
           }
         })
-        // console.log(arrTag)
+        console.log(arrTag)
         return arrTag
       },
       addPost(){

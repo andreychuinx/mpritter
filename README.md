@@ -16,33 +16,28 @@ npm start (in server)
 
 ## Examples
 
-### 
-This API can show your timeline
+### HOME
+Home ialah isi dari post
+di Home tidak bisa post kalau belom login
 
+### LOGIN
+untuk login klik menu login di atas
+setelah login bisa post di home
 
-User requests `localhost:3000/tweet` this API will be shown timeline User in data JSON
+## SIGNUP
+untuk signin logout dulu klo masih status login gk ada tombol signupnya
+di bagian menu atas itu ada tombol SIGNUP
+isi email sama name dan password
 
-### Show Profile
-This API can show your profile
+## UPDATE USER
+untuk update user ada di bagian menu account setelah login
+update user klik button edit aja di card paling atas di menu account
+klik updatenya maka bakalan kelihatan form buat update
+klo udah update klik aja update nanti bakal otomatis ke update
 
-
-User requests `localhost:3000/tweet/user/'twitterID'` this API will be shown `twiterID` Profile in data JSON
-
-### Show Result Search
-This API can show you result of Search
-
-
-User requests `localhost:3000/tweet/search?q='dataSearch'` this app will be shown `datSearch` timeline User in data JSON
-
-### Post to Twitter
-This API can post to your Twitter
-
-
-User requests `localhost:3000/tweet/status` and put your `status` in form with name `staus` and this app will be post to your timeline
-
-## Contributing
-
-This API was created with [hacktiv8-northernFox](https://github.com/northern-fox-2017). Please refer to there to understand the codestyle and workflow. Issues and PRs are welcome! 
+### ACCOUNT
+setelah login bisa klik account
+dis ini bisa buat delete post sesuai user yang ngepost
 
 ## License
 

@@ -8,6 +8,7 @@ class PostController {
   static get(req, res) {
     PostModel.find()
       .populate('userId')
+      .sort({createdAt: 'desc'})
       .exec()
       .then(result => {
         res.status(HttpStatus.OK).json({
@@ -27,6 +28,7 @@ class PostController {
   static userPosts(req, res){
     PostModel.find({userId : req.decoded.userId})
       .populate('userId')
+      .sort({createdAt: 'desc'})      
       .exec()
       .then(result => {
         res.status(HttpStatus.OK).json({
